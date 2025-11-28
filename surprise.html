@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple Gift For You</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #ff99cc, #cc0066, #000000);
+      background-size: 600% 600%;
+      animation: gradientShift 10s ease infinite;
+      overflow-x: hidden;
+      overflow-y: hidden; /* Prevents scroll jump during confetti */
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .content-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+    }
+
+    .overlay-title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5em;
+      color: white;
+      text-shadow: 0 0 10px #ff99cc;
+      font-weight: bold;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .mail-surprise-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .mail-icon {
+      width: 240px;
+      max-width: 95%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      animation: bounce 1.5s infinite;
+      z-index: 2;
+      box-shadow: 0 0 25px rgba(255, 153, 204, 0.6);
+      border-radius: 16px;
+    }
+
+    .mail-icon:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #surpriseContent {
+      animation: fadeIn 1.5s ease-in-out;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #photoPreview {
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff99cc;
+}
+
+#surpriseFlex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+    #letterContainer {
+  max-width: 500px;
+  flex: 1;
+}
+
+
+    #letter {
+      background: #fffaf0;
+      border: 2px solid #ff99cc;
+      padding: 30px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 153, 204, 0.3);
+      font-family: 'Georgia', serif;
+      color: #cc0066;
+      text-align: left;
+    }
+
+    #letter h2 {
+      margin-top: 0;
+      font-family: 'Cursive', sans-serif;
+      color: #ff3399;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: pink;
+      animation: fall 3s linear infinite;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { top: -10px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper" id="confettiWrapper">
+    <div class="overlay-title">🎈 Happy Birthday Kylitoto 🎈</div>
+
+    <div class="mail-surprise-container">
+      <img
+        id="mailIcon"
+        src="envelope.png"
+        alt="Open Mail"
+        class="mail-icon"
+        onclick="revealSurprise()"
+      />
+
+      <div id="surpriseContent" class="hidden">
+  <div id="surpriseFlex">
+    <img id="photoPreview" src="IMG_20250821_123305.jpg" alt="Birthday celebrant" />
+    <div id="letterContainer">
+      <div id="letter">
+        <h2>Dear Trenti,</h2>
+        <p>
+              Today is the day. U're special day, teh. U're 30 na huhu, matanda kana trentiii!! Ayy mali 22 palang pala HAHAHAHA 
+              Pwede kana pala mag-asawa niyan HAAHAHA chosss. Anyways, celebrate ur day with full of love, laughter, and of good memories that you will bring  and keep forever. 
+              Wish you all the best in life and may you achieve all of your dreams and goals.
+              Stay happy and healthy always. Choose what makes you happy. God bless you more!!  <br>
+              Hope you like this simple gift of mine^^ Again, hapi bortdi trenti na aders pa
+            </p>
+            <p style="text-align: right; font-style: italic;">Yours truly,<br/>pipopi</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  <audio autoplay loop>
+    <source src="It_s_Your_Birthday!_–_Monk_Turner__No_Copyright_Music_(256k).mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    function revealSurprise() {
+      document.getElementById("mailIcon").style.display = "none";
+      document.getElementById("surpriseContent").classList.remove("hidden");
+      document.body.style.overflowY = "hidden"; // Lock scroll to prevent shake
+      triggerConfetti();
+    }
+
+    function triggerConfetti() {
+      const wrapper = document.getElementById("confettiWrapper");
+      for (let i = 0; i < 75; i++) {
+        let confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        wrapper.appendChild(confetti);
+      }
+    }
+  </script>
+</body>
+</html>
