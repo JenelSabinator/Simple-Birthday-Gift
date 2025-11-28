@@ -12,7 +12,7 @@
       background-size: 600% 600%;
       animation: gradientShift 10s ease infinite;
       overflow-x: hidden;
-      overflow-y: hidden; /* Prevents scroll jump during confetti */
+      overflow-y: hidden;
     }
 
     @keyframes gradientShift {
@@ -40,6 +40,7 @@
       font-weight: bold;
       z-index: 2;
       pointer-events: none;
+      text-align: center;
     }
 
     .mail-surprise-container {
@@ -48,7 +49,6 @@
       align-items: center;
       justify-content: center;
       min-height: 70vh;
-      position: relative;
       margin-top: 60px;
     }
 
@@ -80,6 +80,7 @@
       animation: fadeIn 1.5s ease-in-out;
       margin-top: 20px;
       text-align: center;
+      width: 100%;
     }
 
     @keyframes fadeIn {
@@ -87,34 +88,39 @@
       to { opacity: 1; }
     }
 
-    #photoPreview {
-  max-width: 250px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ff99cc;
-}
+    #photoWrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: -20px;
+    }
 
-#surpriseFlex {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
+    #photoPreview {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ff99cc;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #surpriseFlex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+      padding: 0 20px;
+    }
 
     #letterContainer {
-  max-width: 500px;
-  flex: 1;
-}
-
+      width: 100%;
+      max-width: 500px;
+    }
 
     #letter {
       background: #fffaf0;
       border: 2px solid #ff99cc;
       padding: 30px;
-      width: 80%;
-      max-width: 500px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(255, 153, 204, 0.3);
       font-family: 'Georgia', serif;
@@ -142,6 +148,27 @@
       0% { top: -10px; opacity: 1; }
       100% { top: 100vh; opacity: 0; }
     }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .overlay-title {
+        font-size: 1.5em;
+        top: 10px;
+        padding: 0 10px;
+      }
+
+      .mail-icon {
+        width: 180px;
+      }
+
+      #letter {
+        padding: 20px;
+      }
+
+      #photoPreview {
+        max-width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -158,25 +185,28 @@
       />
 
       <div id="surpriseContent" class="hidden">
-  <div id="surpriseFlex">
-    <img id="photoPreview" src="IMG_20250821_123305.jpg" alt="Birthday celebrant" />
-    <div id="letterContainer">
-      <div id="letter">
-        <h2>Dear Trenti,</h2>
-        <p>
-              Today is the day. U're special day, teh. U're 30 na huhu, matanda kana trentiii!! Ayy mali 22 palang pala HAHAHAHA 
-              Pwede kana pala mag-asawa niyan HAAHAHA chosss. Anyways, celebrate ur day with full of love, laughter, and of good memories that you will bring  and keep forever. 
-              Wish you all the best in life and may you achieve all of your dreams and goals.
-              Stay happy and healthy always. Choose what makes you happy. God bless you more!!  <br>
-              Hope you like this simple gift of mine^^ Again, hapi bortdi trenti na aders pa
-            </p>
-            <p style="text-align: right; font-style: italic;">Yours truly,<br/>pipopi</p>
+        <div id="photoWrapper">
+          <img id="photoPreview" src="IMG_20250821_123305.jpg" alt="Birthday celebrant" />
+        </div>
+        <div id="surpriseFlex">
+          <div id="letterContainer">
+            <div id="letter">
+              <h2>Dear Trenti,</h2>
+              <p>
+                Today is the day. U're special day, teh. U're 30 na huhu, matanda kana trentiii!! Ayy mali 22 palang pala HAHAHAHA 
+                Pwede kana pala mag-asawa niyan HAAHAHA chosss. Anyways, celebrate ur day with full of love, laughter, and of good memories that you will bring and keep forever. 
+                Wish you all the best in life and may you achieve all of your dreams and goals.
+                Stay happy and healthy always. Choose what makes you happy. God bless you more!!<br>
+                Hope you like this simple gift of mine^^ Again, hapi bortdi trenti na aders pa
+              </p>
+              <p style="text-align: right; font-style: italic;">Yours truly,<br/>pipopi</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  
   <audio autoplay loop>
     <source src="It_s_Your_Birthday!_–_Monk_Turner__No_Copyright_Music_(256k).mp3" type="audio/mpeg" />
   </audio>
@@ -185,7 +215,7 @@
     function revealSurprise() {
       document.getElementById("mailIcon").style.display = "none";
       document.getElementById("surpriseContent").classList.remove("hidden");
-      document.body.style.overflowY = "hidden"; // Lock scroll to prevent shake
+      document.body.style.overflowY = "hidden";
       triggerConfetti();
     }
 
